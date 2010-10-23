@@ -6,7 +6,14 @@
   html { height: 100% }
   body { height: 100%; margin: 0px; padding: 0px ; background-color: #000; }
   #mcmap { height: 100% }
+  #footer {
+	background: #E5E3DF;
+	height: 3%;
+	width: 100%;
+  }
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
+<script type="text/javascript" src="maprefresh.js"></script>
 <script type="text/javascript" src="markers.js"></script>
 <script type="text/javascript" src="regions.js"></script>
 <script type="text/javascript"
@@ -19,7 +26,7 @@
     tileSize:     384,
     defaultZoom:  3,
     maxZoom:      {maxzoom},
-    cacheMinutes: 0, // Change this to have browsers automatically request new images every x minutes
+    cacheMinutes: 120, // Change this to have browsers automatically request new images every x minutes
     debug:        false
   };
   
@@ -233,11 +240,13 @@
 	
 	// initialize the markers and regions
 	initMarkers();
-    initRegions();
+    	initRegions();
+	loadPlayerMarkers();
   }
 </script>
 </head>
 <body onload="initialize()">
-  <div id="mcmap" style="width:100%; height:100%"></div>
+  <div id="mcmap" style="width:100%; height:97%"></div>
+  <div id="footer" class="footer">Last Updated: {lastUpdated} || Starts an update every 2 hours at 45 minutes after.</div>
 </body>
 </html>

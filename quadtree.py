@@ -25,6 +25,7 @@ import collections
 import json
 import logging
 import util
+from time import gmtime, strftime
 
 from PIL import Image
 
@@ -133,6 +134,9 @@ class QuadtreeGen(object):
                 "{maxzoom}", str(zoomlevel))
         html = html.replace(
                 "{imgformat}", str(imgformat))
+        html = html.replace(
+                "{lastUpdated}",
+                strftime("%a, %d %b %Y %H:%M:%S %Z"))
                 
         with open(os.path.join(self.destdir, "index.html"), 'w') as output:
             output.write(html)
