@@ -15,16 +15,24 @@ setInterval(loadPlayerMarkers, 1000 * 15);
 function loadPlayerMarkers() {
     $.getJSON('players.json', function(data) {
         deletePlayerMarkers();
-        playerMarkers = [];
+        playerMarkers = [],
+	plist = [];
+
+	if (data.length == 0)
+        {
+		$('#plist').html('[No players online]');
+		return;
+	}
+
         for (i in data) {
             var item = data[i],
 		m = reg.exec(item.timestamp),
 		ts = new Date(m[1],m[2]-1,m[3],m[4],m[5],m[6]),
 		d = new Date(),
-		diff = d.getTime() - ts.getTime();
+		diff = d.getTime() - ts.getTime(),
+	        converted = fromWorldToLatLng(item.x, item.y, item.z);
 	    if( diff < 10 * 1000*60 )
 	    {
-	            var converted = fromWorldToLatLng(item.x, item.y, item.z);
 	            playerMarkers.push(
 	                new google.maps.Marker({
 	                    position: converted,
@@ -33,7 +41,27 @@ function loadPlayerMarkers() {
 	                    icon: 'User.png'
 	                })
 	            );
+		    plist.push("<a href='#' onClick='gotoPlayer(" + i + ")'>" + item.msg + "</a>");
+	    } 
+	    else
+            {
+	            playerMarkers.push(
+	                new google.maps.Marker({
+	                    position: converted,
+	                    map: map,
+	                    title: item.msg + " - Idle since " + ts.toString(),
+	                    icon: 'User.png'
+	                })
+	            );
+		    plist.push("<a href='#' onClick='gotoPlayer(" + i + ")' class='idle'>" + item.msg + "</a>");
 	    }
+	    $('#plist').html(plist.join("<br/>"));
         }
     });
 }  
+
+function gotoPlayer(index)
+{
+	map.setCenter(playerMarkers[index].position);
+	map.setZoom(6);
+}
