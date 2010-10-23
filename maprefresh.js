@@ -41,7 +41,7 @@ function loadPlayerMarkers() {
 	                    icon: 'User.png'
 	                })
 	            );
-		    plist.push("<a href='#' onClick='gotoPlayer(" + i + ")'>" + item.msg + "</a>");
+		    plist.push("<span onClick='gotoPlayer(" + i + ")'>" + item.msg + "</span>");
 	    } 
 	    else
             {
@@ -53,7 +53,7 @@ function loadPlayerMarkers() {
 	                    icon: 'User.png'
 	                })
 	            );
-		    plist.push("<a href='#' onClick='gotoPlayer(" + i + ")' class='idle'>" + item.msg + "</a>");
+		    plist.push("<span onClick='gotoPlayer(" + i + ")' class='idle'>" + item.msg + "</span>");
 	    }
 	    $('#plist').html(plist.join("<br/>"));
         }

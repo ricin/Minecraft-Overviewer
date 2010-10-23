@@ -6,32 +6,32 @@
   html { height: 100% }
   body { height: 100%; margin: 0px; padding: 0px ; background-color: #000; }
   #mcmap { height: 100% }
-  #footer {
-	background: #E5E3DF;
-	height: 3%;
-	width: 100%;
+  #players, #info {
+        position: absolute;
+        top: 5px; right: 5px;
+        z-index: 100;
+        padding: 3px;
+        font-family: arial, verdana, helvetica;
+        font-size: 9pt;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        text-align: right;
   }
-  #players {
-  	position: absolute;
-  	top: 5px; right: 5px;
-  	z-index: 100;
-	padding: 3px;
-	font-family: arial, verdana, helvetica;
-	font-size: 9pt;
-	background: rgba(0, 0, 0, 0.5);
-	color: #fff;
-	text-align: right;
+  #info {
+        top: auto;
+        bottom: 20px;
+        color: #bbb;
   }
   #players p {
-	margin: 1px;
-  }  	
-  #players a {
-	color: #fff;
-	text-decoration: none;
+        margin: 1px;
   }
-  #players a.idle {
-        color: #bbb;
+  #players span {
+        cursor: pointer;
+        color: #fff;
         text-decoration: none;
+  }
+  #players span.idle {
+        color: #bbb;
   }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
@@ -268,8 +268,8 @@
 </script>
 </head>
 <body onload="initialize()">
-  <div id="mcmap" style="width:100%; height:97%"></div>
-  <div id="footer" class="footer">Last Updated: {lastUpdated} || Starts an update every 2 hours at 45 minutes after.</div>
+  <div id="mcmap" style="width:100%; height:100%"></div>
+  <div id="info">Last Updated: {lastUpdated} || Starts an update every 2 hours at 45 minutes after.</div>
   <div id="players">
 	<b><u>Online</u></b>
 	<p id="plist"></p>
